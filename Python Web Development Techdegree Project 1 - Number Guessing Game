@@ -1,0 +1,119 @@
+Python Web Development Techdegree
+Project 1 - Number Guessing Game
+--------------------------------
+
+For this first project we will be using Workspaces. 
+
+NOTE: If you strongly prefer to work locally on your own computer, you can totally do that by clicking: File -> Download Workspace in the file menu after you fork the snapshot of this workspace.
+
+"""
+
+import random
+
+
+def start_game():
+    """Psuedo-code Hints
+    
+    When the program starts, we want to:
+    ------------------------------------
+    1. Display an intro/welcome message to the player.
+    2. Store a random number as the answer/solution.
+    3. Continuously prompt the player for a guess.
+      a. If the guess greater than the solution, display to the player "It's lower".
+      b. If the guess is less than the solution, display to the player "It's higher".
+    
+    4. Once the guess is correct, stop looping, inform the user they "Got it"
+         and show how many attempts it took them to get the correct number.
+    5. Let the player know the game is ending, or something that indicates the game is over.
+    
+    ( You can add more features/enhancements if you'd like to. )
+    """
+    # write your code inside this function.
+    def show_help(): 
+      return print("""
+        
+        Pick a number between some range of numbers like: "Pick a number between 1 and 10". Their
+        
+        job is to make a guess, and you tell them whether their guess is too high or too low. Their
+        
+        next guess is based on what you've told them. If they guess the right answer the game is
+        
+        done. Normally you try to do this in the lowest number of tries possible. Often it is used
+        
+        to compete with friends to see who can get the answer in the lowest number of guesses. \n""")
+      
+
+  
+
+  
+
+    
+    name =  input("Hello, before we begin. Can you give your name please: ")
+    # Let the user know the range of the number he should guess in
+    print("Welcome {}, You will be playing the game called Pick a number. You have to pick a number between 1 and 10".format(name))
+    
+    print("""
+    Before we start you should know you can either enter
+    "Help" if you don't understand something
+    or 
+    "Done" if you want to finish the game 
+    
+    Have fun playing""") 
+    
+    #Count number attempts of player
+    number_attempts  = 0
+    random_number =  random.randint(1,10)
+    #Continue the game until the player want to stop or he guess the right answer
+    while True:
+      try: 
+        guess_number = input("Enter number: ")
+        if guess_number.lower() == "help":
+          #Show a help statement for the user if he doesn't know the game
+          show_help()
+          continue
+          
+        if guess_number.lower() == "done": 
+          # If the user wants to stop earlier 
+          print("Too bad! Until next time")
+          break
+          
+        guess_number = int(guess_number)
+        number_attempts += 1
+        
+        if guess_number == random_number: 
+          print("Congratzz! You got it. You had the guess in {} attempts ".format(number_attempts)) 
+            # Ask the user if he still wants to continue
+        
+          continue_game = input("Do you still want to play some more? Y/N: ")
+          if continue_game.lower() == "y": 
+              #If the user wants to cointinue set the score back to zero and choose an other number to guess
+            print("Great! Let's play some more!")
+            number_attempts  = 0
+            random_number =  random.randint(1,10)
+            continue 
+            
+          elif continue_game.lower() == "n":
+            print("Too bad! Until next time")
+            break
+            
+          else: 
+              #if the user put something in that is not allowed the loop keeps running
+            print("Sorry, that not a word I understand!")
+            continue
+              #Go back to begin       
+        if guess_number > random_number: 
+          print("Sorry that wrong! you should guess lower")
+          continue
+        elif guess_number < random_number: 
+          print("Sorry that wrong! you should guess higher")
+          continue 
+          
+      except ValueError: 
+        print("You can't write that! Try again!!")
+        continue
+          
+
+
+if __name__ == '__main__':
+    # Kick off the program by calling the start_game function.
+    start_game()
